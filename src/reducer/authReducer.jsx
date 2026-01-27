@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import ApiService from '../constants/apiService';
 import authHeader from '../utils/authHeader';
+import getToken from '../utils/getToken';
 
 export const login = createAsyncThunk('auth/login', async (payload, { rejectWithValue }) => {
   try {
@@ -42,7 +43,7 @@ export const fetchProfile = createAsyncThunk(
 
 const initialState = {
   login: {
-    token: localStorage.getItem('access_token') || null,
+    token: getToken(),
     status: 'idle',
     message: null,
   },
