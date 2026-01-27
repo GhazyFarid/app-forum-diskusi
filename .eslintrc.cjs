@@ -6,7 +6,7 @@ module.exports = {
     jest: true,
   },
 
-  extends: ['airbnb', 'airbnb/hooks', 'plugin:storybook/recommended'],
+  extends: ['airbnb', 'airbnb/hooks'],
 
   parserOptions: {
     ecmaVersion: 'latest',
