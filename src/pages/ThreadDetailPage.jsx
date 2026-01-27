@@ -6,9 +6,17 @@ import { getThreadById } from '../reducer/threadReducer';
 import daysAgo from '../utils/date';
 import VoteButton from '../components/VoteButton';
 import { safeHtml } from '../utils/textUtils';
-import { downVoteThread, neutralVoteThread, upVoteThread } from '../reducer/voteThreadReducer';
+import {
+  downVoteThread,
+  neutralVoteThread,
+  upVoteThread,
+} from '../reducer/voteThreadReducer';
 import CommentItem from '../components/CommentItem';
-import { downVoteComment, neutralVoteComment, upVoteComment } from '../reducer/voteCommentReducer';
+import {
+  downVoteComment,
+  neutralVoteComment,
+  upVoteComment,
+} from '../reducer/voteCommentReducer';
 import { createComment } from '../reducer/commetReducer';
 import TextAreaInput from '../components/TextAreaInput';
 import Button from '../components/Button';
@@ -35,7 +43,11 @@ export default function ThreadDetailPage() {
   }, [dispatch, id]);
 
   if (status === 'loading') {
-    return <p style={{ textAlign: 'center', marginTop: 40 }}>Loading...</p>;
+    return (
+      <p style={{ textAlign: 'center', marginTop: 40 }}>
+        Loading...
+      </p>
+    );
   }
 
   if (!detail) return null;
@@ -50,7 +62,6 @@ export default function ThreadDetailPage() {
       return;
     }
 
-    // Sudah upvote
     if (hasUpVoted) {
       setLocalDetail((prev) => ({
         ...prev,
@@ -76,7 +87,6 @@ export default function ThreadDetailPage() {
       return;
     }
 
-    // Sudah downvote
     if (hasDownVoted) {
       setLocalDetail((prev) => ({
         ...prev,
@@ -87,7 +97,6 @@ export default function ThreadDetailPage() {
       return;
     }
 
-    // Belum downvote
     setLocalDetail((prev) => ({
       ...prev,
       downVotesBy: [...prev.downVotesBy, userId],
@@ -112,7 +121,6 @@ export default function ThreadDetailPage() {
         }),
       ).unwrap();
 
-      // langsung tambahkan comment ke local state
       setLocalDetail((prev) => ({
         ...prev,
         comments: [response, ...prev.comments],
@@ -157,7 +165,9 @@ export default function ThreadDetailPage() {
           #
           {localDetail.category}
         </div>
-        <h1 style={{ margin: '8px 0 16px', color: '#111827' }}>{localDetail.title}</h1>
+        <h1 style={{ margin: '8px 0 16px', color: '#111827' }}>
+          {localDetail.title}
+        </h1>
         <div
           style={{
             display: 'flex',
@@ -178,7 +188,9 @@ export default function ThreadDetailPage() {
             }}
           />
           <div>
-            <div style={{ fontWeight: 500, color: '#111827' }}>{localDetail.owner.name}</div>
+            <div style={{ fontWeight: 500, color: '#111827' }}>
+              {localDetail.owner.name}
+            </div>
             <div>{daysAgo(localDetail.createdAt)}</div>
           </div>
         </div>
@@ -276,31 +288,41 @@ export default function ThreadDetailPage() {
         )
       </h3>
 
-      {detail.comments.length === 0 && <p style={{ color: '#6b7280' }}>Belum ada komentar</p>}
+      {detail.comments.length === 0 && (
+        <p style={{ color: '#6b7280' }}>
+          Belum ada komentar
+        </p>
+      )}
 
       {localDetail.comments.map((comment) => (
         <CommentItem
           key={comment.id}
           comment={comment}
           userId={userId}
-          onUpVote={() => dispatch(
-            upVoteComment({
-              threadId: localDetail.id,
-              commentId: comment.id,
-            }),
-          )}
-          onDownVote={() => dispatch(
-            downVoteComment({
-              threadId: localDetail.id,
-              commentId: comment.id,
-            }),
-          )}
-          onNeutralVote={() => dispatch(
-            neutralVoteComment({
-              threadId: localDetail.id,
-              commentId: comment.id,
-            }),
-          )}
+          onUpVote={() =>
+            dispatch(
+              upVoteComment({
+                threadId: localDetail.id,
+                commentId: comment.id,
+              }),
+            )
+          }
+          onDownVote={() =>
+            dispatch(
+              downVoteComment({
+                threadId: localDetail.id,
+                commentId: comment.id,
+              }),
+            )
+          }
+          onNeutralVote={() =>
+            dispatch(
+              neutralVoteComment({
+                threadId: localDetail.id,
+                commentId: comment.id,
+              }),
+            )
+          }
         />
       ))}
     </div>
