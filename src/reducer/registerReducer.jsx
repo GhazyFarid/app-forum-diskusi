@@ -3,8 +3,8 @@ import axios from 'axios';
 
 import ApiService from '../constants/apiService';
 
-export const registerReducer = createAsyncThunk(
-  'register/registerReducer',
+export const registerUser = createAsyncThunk(
+  'register/registerUser',
   async (payload, { rejectWithValue }) => {
     try {
       const response = await axios.post(ApiService.register, payload);
@@ -33,16 +33,16 @@ const registerSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(registerReducer.pending, (state) => {
+      .addCase(registerUser.pending, (state) => {
         state.status = 'loading';
         state.message = null;
       })
-      .addCase(registerReducer.fulfilled, (state, action) => {
+      .addCase(registerUser.fulfilled, (state, action) => {
         state.status = 'success';
         state.data = action.payload.data.user;
         state.message = action.payload.message;
       })
-      .addCase(registerReducer.rejected, (state, action) => {
+      .addCase(registerUser.rejected, (state, action) => {
         state.status = 'error';
         state.data = null;
         state.message = action.payload;

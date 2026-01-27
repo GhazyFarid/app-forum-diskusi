@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 
-import { clearDataRegister, registerReducer } from '../reducer/registerReducer';
+import { clearDataRegister, registerUser } from '../reducer/registerReducer';
 import TextInput from '../components/TextInput';
 import PasswordInput from '../components/PasswordInput';
 import Button from '../components/Button';
@@ -21,7 +21,7 @@ export default function RegisterPage() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(registerReducer(form));
+    dispatch(registerUser(form));
   };
 
   useEffect(() => {
