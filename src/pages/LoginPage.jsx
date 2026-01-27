@@ -60,21 +60,23 @@ export default function LoginPage() {
             placeholder="Input Email"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
-            required
           />
           <PasswordInput
             label="Password"
             value={form.password}
             onChange={(e) => setForm({ ...form, password: e.target.value })}
             placeholder="Input Password"
-            required
           />
 
           <Button disabled={status === 'loading'} type="submit">
             {status === 'loading' ? 'Loading...' : 'Login'}
           </Button>
 
-          {status === 'error' && <p style={{ color: '#ef4444', marginTop: 8 }}>{message}</p>}
+          {status === 'error' && (
+            <p data-cy="login-error" style={{ color: '#ef4444', marginTop: 8 }}>
+              {message}
+            </p>
+          )}
         </form>
 
         <p
@@ -86,7 +88,6 @@ export default function LoginPage() {
           }}
         >
           Belum punya akun?
-          {' '}
           <Link
             to="/register"
             style={{
