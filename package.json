@@ -26,8 +26,9 @@
     "e2e": "cypress run",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test:ci": "npm test && npm run e2e",
-    "ci:test": "start-server-and-test start http://localhost:3000 test:ci"
+    "test:ci": "npm test",
+    "serve": "serve -s build -l 3000",
+    "ci:test": "npm run build && start-server-and-test serve http://localhost:3000 test:ci --timeout 200000"
   },
   "browserslist": {
     "production": [
@@ -56,6 +57,7 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-storybook": "^10.2.1",
     "prop-types": "^15.8.1",
+    "serve": "^14.2.5",
     "start-server-and-test": "^2.1.3",
     "storybook": "^10.2.1",
     "webpack": "^5.104.1"
