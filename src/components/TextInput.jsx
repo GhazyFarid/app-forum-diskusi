@@ -12,6 +12,7 @@ export default function TextInput({
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
       <label
+        htmlFor={inputId}
         style={{
           fontSize: 14,
           fontWeight: 500,
@@ -26,7 +27,7 @@ export default function TextInput({
         type={type}
         placeholder={placeholder}
         value={value}
-        required={required}
+        required={false}
         onChange={onChange}
         style={{
           padding: '10px 12px',
