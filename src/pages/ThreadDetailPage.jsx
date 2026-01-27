@@ -299,30 +299,18 @@ export default function ThreadDetailPage() {
           key={comment.id}
           comment={comment}
           userId={userId}
-          onUpVote={() =>
-            dispatch(
-              upVoteComment({
-                threadId: localDetail.id,
-                commentId: comment.id,
-              }),
-            )
-          }
-          onDownVote={() =>
-            dispatch(
-              downVoteComment({
-                threadId: localDetail.id,
-                commentId: comment.id,
-              }),
-            )
-          }
-          onNeutralVote={() =>
-            dispatch(
-              neutralVoteComment({
-                threadId: localDetail.id,
-                commentId: comment.id,
-              }),
-            )
-          }
+          onUpVote={() => dispatch(upVoteComment({
+            threadId: localDetail.id,
+            commentId: comment.id,
+          }))}
+          onDownVote={() => dispatch(downVoteComment({
+            threadId: localDetail.id,
+            commentId: comment.id,
+          }))}
+          onNeutralVote={() => dispatch(neutralVoteComment({
+            threadId: localDetail.id,
+            commentId: comment.id,
+          }))}
         />
       ))}
     </div>
