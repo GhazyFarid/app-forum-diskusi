@@ -27,7 +27,7 @@ export default function TextInput({
         type={type}
         placeholder={placeholder}
         value={value}
-        required={false}
+        required={required}
         onChange={onChange}
         style={{
           padding: '10px 12px',
