@@ -12,7 +12,6 @@ export default function TextInput({
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
       <label
-        htmlFor={inputId}
         style={{
           fontSize: 14,
           fontWeight: 500,
