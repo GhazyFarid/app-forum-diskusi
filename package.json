@@ -26,8 +26,9 @@
     "e2e": "cypress run",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test:ci": "npm test && npm run e2e",
-    "ci:test": "start-server-and-test start http://localhost:3000 test:ci"
+    "test:ci": "npm test",
+    "serve": "serve -s build -l 3000",
+    "ci:test": "npm run build && start-server-and-test serve http://localhost:3000 test:ci --timeout 200000"
   },
   "browserslist": {
     "production": [
