@@ -109,7 +109,7 @@ export default function ThreadDetailPage() {
         createComment({
           threadId: localDetail.id,
           content: commentText,
-        })
+        }),
       ).unwrap();
 
       // langsung tambahkan comment ke local state
@@ -154,7 +154,8 @@ export default function ThreadDetailPage() {
             marginBottom: 12,
           }}
         >
-          #{localDetail.category}
+          #
+          {localDetail.category}
         </div>
         <h1 style={{ margin: '8px 0 16px', color: '#111827' }}>{localDetail.title}</h1>
         <div
@@ -269,7 +270,11 @@ export default function ThreadDetailPage() {
       </div>
 
       {/* COMMENTS */}
-      <h3 style={{ marginBottom: 16 }}>Komentar ({detail.comments.length})</h3>
+      <h3 style={{ marginBottom: 16 }}>
+        Komentar (
+        {detail.comments.length}
+        )
+      </h3>
 
       {detail.comments.length === 0 && <p style={{ color: '#6b7280' }}>Belum ada komentar</p>}
 
@@ -278,30 +283,24 @@ export default function ThreadDetailPage() {
           key={comment.id}
           comment={comment}
           userId={userId}
-          onUpVote={() =>
-            dispatch(
-              upVoteComment({
-                threadId: localDetail.id,
-                commentId: comment.id,
-              })
-            )
-          }
-          onDownVote={() =>
-            dispatch(
-              downVoteComment({
-                threadId: localDetail.id,
-                commentId: comment.id,
-              })
-            )
-          }
-          onNeutralVote={() =>
-            dispatch(
-              neutralVoteComment({
-                threadId: localDetail.id,
-                commentId: comment.id,
-              })
-            )
-          }
+          onUpVote={() => dispatch(
+            upVoteComment({
+              threadId: localDetail.id,
+              commentId: comment.id,
+            }),
+          )}
+          onDownVote={() => dispatch(
+            downVoteComment({
+              threadId: localDetail.id,
+              commentId: comment.id,
+            }),
+          )}
+          onNeutralVote={() => dispatch(
+            neutralVoteComment({
+              threadId: localDetail.id,
+              commentId: comment.id,
+            }),
+          )}
         />
       ))}
     </div>
