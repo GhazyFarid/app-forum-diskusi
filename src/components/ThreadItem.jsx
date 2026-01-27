@@ -1,18 +1,14 @@
-import { useNavigate } from "react-router-dom";
-import { BiComment, BiUser } from "react-icons/bi";
-import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { BiComment, BiUser } from 'react-icons/bi';
+import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 
-import { daysAgo } from "../utils/date";
-import VoteButton from "./VoteButton";
-import { htmlPreview } from "../utils/textUtils";
-import {
-  downVoteThread,
-  neutralVoteThread,
-  upVoteThread,
-} from "../reducer/voteThreadReducer";
+import daysAgo from '../utils/date';
+import VoteButton from './VoteButton';
+import { htmlPreview } from '../utils/textUtils';
+import { downVoteThread, neutralVoteThread, upVoteThread } from '../reducer/voteThreadReducer';
 
-export default function ThreadItem({ thread, userId = "" }) {
+export default function ThreadItem({ thread, userId = '' }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [localThread, setLocalThread] = useState({
@@ -34,7 +30,7 @@ export default function ThreadItem({ thread, userId = "" }) {
 
   const handleUpVote = () => {
     if (!userId) {
-      alert("Please login first!");
+      alert('Please login first!');
       return;
     }
 
@@ -63,7 +59,7 @@ export default function ThreadItem({ thread, userId = "" }) {
 
   const handleDownVote = () => {
     if (!userId) {
-      alert("Please login first!");
+      alert('Please login first!');
       return;
     }
 
@@ -97,43 +93,49 @@ export default function ThreadItem({ thread, userId = "" }) {
   return (
     <div
       style={{
-        border: "1px solid #e5e7eb",
+        border: '1px solid #e5e7eb',
         borderRadius: 10,
         padding: 16,
         marginBottom: 16,
-        backgroundColor: "#ffffff",
-        boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+        backgroundColor: '#ffffff',
+        boxShadow: '0 2px 6px rgba(0,0,0,0.05)',
       }}
     >
       <div
         style={{
-          display: "inline-block",
-          padding: "4px 10px",
+          display: 'inline-block',
+          padding: '4px 10px',
           fontSize: 12,
           fontWeight: 500,
-          backgroundColor: "#eff6ff",
-          color: "#2563eb",
+          backgroundColor: '#eff6ff',
+          color: '#2563eb',
           borderRadius: 999,
           marginBottom: 8,
         }}
       >
-        #{localThread.category}
+        #
+        {localThread.category}
       </div>
 
-      <h3
+      <button
+        type="button"
         onClick={handleClickDetail}
         style={{
-          cursor: "pointer",
-          color: "#111827",
-          margin: "6px 0 8px",
+          all: 'unset',
+          cursor: 'pointer',
+          color: '#111827',
+          margin: '6px 0 8px',
+          fontSize: '1.17em', // ukuran default h3
+          fontWeight: 600,
+          display: 'block',
         }}
       >
         {localThread.title}
-      </h3>
+      </button>
 
       <p
         style={{
-          color: "#374151",
+          color: '#374151',
           lineHeight: 1.6,
           marginBottom: 16,
         }}
@@ -143,14 +145,14 @@ export default function ThreadItem({ thread, userId = "" }) {
 
       <div
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          borderTop: "1px solid #e5e7eb",
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          borderTop: '1px solid #e5e7eb',
           paddingTop: 12,
         }}
       >
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <VoteButton
             type="up"
             count={localThread.upVotesBy.length}
@@ -167,21 +169,21 @@ export default function ThreadItem({ thread, userId = "" }) {
 
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
+            display: 'flex',
+            alignItems: 'center',
             gap: 14,
             fontSize: 12,
-            color: "#6b7280",
+            color: '#6b7280',
           }}
         >
-          <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
             <BiComment size={14} />
             {localThread.totalComments}
           </span>
 
           <span>{daysAgo(localThread.createdAt)}</span>
 
-          <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
             <BiUser size={14} />
             {localThread.ownerName}
           </span>

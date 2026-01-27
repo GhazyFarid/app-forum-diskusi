@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import VoteButton from "./VoteButton";
-import { daysAgo } from "../utils/date";
-import { safeHtml } from "../utils/textUtils";
+import VoteButton from './VoteButton';
+import daysAgo from '../utils/date';
+import { safeHtml } from '../utils/textUtils';
 
 export default function CommentItem({
-  comment,
-  userId,
-  onUpVote,
-  onDownVote,
-  onNeutralVote,
+  comment, userId, onUpVote, onDownVote, onNeutralVote,
 }) {
   const [localComment, setLocalComment] = useState(comment);
 
@@ -22,7 +18,7 @@ export default function CommentItem({
 
   const handleUpVote = () => {
     if (!userId) {
-      alert("Please login first!");
+      alert('Please login first!');
       return;
     }
 
@@ -47,7 +43,7 @@ export default function CommentItem({
 
   const handleDownVote = () => {
     if (!userId) {
-      alert("Please login first!");
+      alert('Please login first!');
       return;
     }
 
@@ -73,40 +69,41 @@ export default function CommentItem({
   return (
     <div
       style={{
-        display: "flex",
+        display: 'flex',
         gap: 16,
         padding: 16,
         marginBottom: 16,
-        border: "1px solid #e5e7eb",
+        border: '1px solid #e5e7eb',
         borderRadius: 10,
-        backgroundColor: "#ffffff",
+        backgroundColor: '#ffffff',
       }}
     >
       <img
         src={localComment.owner.avatar}
         alt={localComment.owner.name}
-        style={{ width: 36, height: 36, borderRadius: "50%" }}
+        style={{ width: 36, height: 36, borderRadius: '50%' }}
       />
 
       <div style={{ flex: 1 }}>
         <div
           style={{
-            display: "flex",
-            justifyContent: "space-between",
+            display: 'flex',
+            justifyContent: 'space-between',
             marginBottom: 6,
             fontSize: 13,
-            color: "#6b7280",
+            color: '#6b7280',
           }}
         >
-          <span style={{ fontWeight: 500, color: "#111827" }}>
-            {localComment.owner.name}
-          </span>
+          <span style={{ fontWeight: 500, color: '#111827' }}>{localComment.owner.name}</span>
           <span>{daysAgo(localComment.createdAt)}</span>
         </div>
 
-        <div dangerouslySetInnerHTML={safeHtml(localComment.content)} />
+        <div
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={safeHtml(localComment.content)}
+        />
 
-        <div style={{ marginTop: 8, display: "flex", gap: 8 }}>
+        <div style={{ marginTop: 8, display: 'flex', gap: 8 }}>
           <VoteButton
             type="up"
             count={localComment.upVotesBy.length}

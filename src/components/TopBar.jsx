@@ -1,8 +1,8 @@
-import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { FiLogIn, FiLogOut } from "react-icons/fi";
+import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { FiLogIn, FiLogOut } from 'react-icons/fi';
 
-import { logout } from "../reducer/authReducer";
+import { logout } from '../reducer/authReducer';
 
 export default function TopBar() {
   const dispatch = useDispatch();
@@ -12,28 +12,28 @@ export default function TopBar() {
   return (
     <header
       style={{
-        borderBottom: "1px solid #e5e7eb",
-        backgroundColor: "#ffffff",
+        borderBottom: '1px solid #e5e7eb',
+        backgroundColor: '#ffffff',
       }}
     >
       <div
         style={{
           maxWidth: 900,
-          margin: "0 auto",
-          padding: "12px 16px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
+          margin: '0 auto',
+          padding: '12px 16px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
         }}
       >
         {/* Left Menu */}
-        <nav style={{ display: "flex", gap: 16 }}>
+        <nav style={{ display: 'flex', gap: 16 }}>
           <NavLink
             to="/"
             style={({ isActive }) => ({
               fontWeight: 600,
-              color: isActive ? "#2563eb" : "#374151",
-              textDecoration: "none",
+              color: isActive ? '#2563eb' : '#374151',
+              textDecoration: 'none',
             })}
           >
             Threads
@@ -43,8 +43,8 @@ export default function TopBar() {
             to="/leaderboard"
             style={({ isActive }) => ({
               fontWeight: 600,
-              color: isActive ? "#2563eb" : "#374151",
-              textDecoration: "none",
+              color: isActive ? '#2563eb' : '#374151',
+              textDecoration: 'none',
             })}
           >
             Leaderboard
@@ -55,17 +55,18 @@ export default function TopBar() {
         <div>
           {isAuthenticated ? (
             <button
+              type="button"
               onClick={() => dispatch(logout())}
               style={{
-                display: "flex",
-                alignItems: "center",
+                display: 'flex',
+                alignItems: 'center',
                 gap: 6,
                 fontSize: 14,
                 fontWeight: 500,
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                color: "#ef4444",
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                color: '#ef4444',
               }}
             >
               <FiLogOut size={16} />
@@ -75,13 +76,13 @@ export default function TopBar() {
             <NavLink
               to="/login"
               style={{
-                display: "flex",
-                alignItems: "center",
+                display: 'flex',
+                alignItems: 'center',
                 gap: 6,
                 fontSize: 14,
                 fontWeight: 500,
-                textDecoration: "none",
-                color: "#2563eb",
+                textDecoration: 'none',
+                color: '#2563eb',
               }}
             >
               <FiLogIn size={16} />

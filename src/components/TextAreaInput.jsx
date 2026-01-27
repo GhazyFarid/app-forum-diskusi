@@ -2,44 +2,29 @@ export default function TextAreaInput({
   label,
   value,
   onChange,
-  placeholder = "",
+  placeholder = '',
   required = false,
   rows = 4,
+  name,
 }) {
+  const id = `textarea-${name}`;
+
   return (
-    <label
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        fontSize: 14,
-        fontWeight: 500,
-      }}
-    >
-      {label}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <label htmlFor={id} style={{ fontSize: 14, fontWeight: 500 }}>
+        {label}
+      </label>
+
       <textarea
+        id={id}
+        name={name}
         placeholder={placeholder}
         value={value}
         required={required}
         rows={rows}
         onChange={onChange}
-        style={{
-          marginTop: 6,
-          padding: "10px 12px",
-          borderRadius: 8,
-          border: "1px solid #ddd",
-          fontSize: 14,
-          outline: "none",
-          resize: "vertical",
-        }}
-        onFocus={(e) => {
-          e.target.style.borderColor = "#667eea";
-          e.target.style.boxShadow = "0 0 0 2px rgba(102,126,234,0.2)";
-        }}
-        onBlur={(e) => {
-          e.target.style.borderColor = "#ddd";
-          e.target.style.boxShadow = "none";
-        }}
+        className="textarea"
       />
-    </label>
+    </div>
   );
 }

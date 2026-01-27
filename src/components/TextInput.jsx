@@ -2,22 +2,27 @@ export default function TextInput({
   label,
   value,
   onChange,
-  type = "text",
-  placeholder = "",
+  type = 'text',
+  placeholder = '',
   required = false,
   name,
 }) {
+  const inputId = `input-${name}`;
+
   return (
-    <label
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        fontSize: 14,
-        fontWeight: 500,
-      }}
-    >
-      {label}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <label
+        htmlFor={inputId}
+        style={{
+          fontSize: 14,
+          fontWeight: 500,
+        }}
+      >
+        {label}
+      </label>
+
       <input
+        id={inputId}
         name={name}
         type={type}
         placeholder={placeholder}
@@ -25,22 +30,13 @@ export default function TextInput({
         required={required}
         onChange={onChange}
         style={{
-          marginTop: 6,
-          padding: "10px 12px",
+          padding: '10px 12px',
           borderRadius: 8,
-          border: "1px solid #ddd",
+          border: '1px solid #ddd',
           fontSize: 14,
-          outline: "none",
-        }}
-        onFocus={(e) => {
-          e.target.style.borderColor = "#667eea";
-          e.target.style.boxShadow = "0 0 0 2px rgba(102,126,234,0.2)";
-        }}
-        onBlur={(e) => {
-          e.target.style.borderColor = "#ddd";
-          e.target.style.boxShadow = "none";
+          outline: 'none',
         }}
       />
-    </label>
+    </div>
   );
 }

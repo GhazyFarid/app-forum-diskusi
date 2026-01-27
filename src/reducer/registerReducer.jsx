@@ -1,18 +1,16 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-import { ApiService } from "../constants/apiService";
+import ApiService from '../constants/apiService';
 
 export const registerReducer = createAsyncThunk(
-  "register/registerReducer",
+  'register/registerReducer',
   async (payload, { rejectWithValue }) => {
     try {
       const response = await axios.post(ApiService.register, payload);
       return response.data;
     } catch (error) {
-      return rejectWithValue(
-        error.response?.data?.message || "Register failed",
-      );
+      return rejectWithValue(error.response?.data?.message || 'Register failed');
     }
   },
 );
@@ -20,32 +18,32 @@ export const registerReducer = createAsyncThunk(
 const initialState = {
   data: null,
   message: null,
-  status: "idle", // idle | loading | success | error
+  status: 'idle', // idle | loading | success | error
 };
 
 const registerSlice = createSlice({
-  name: "register",
+  name: 'register',
   initialState,
   reducers: {
     clearDataRegister: (state) => {
       state.data = null;
       state.message = null;
-      state.status = "idle";
+      state.status = 'idle';
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(registerReducer.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
         state.message = null;
       })
       .addCase(registerReducer.fulfilled, (state, action) => {
-        state.status = "success";
+        state.status = 'success';
         state.data = action.payload.data.user;
         state.message = action.payload.message;
       })
       .addCase(registerReducer.rejected, (state, action) => {
-        state.status = "error";
+        state.status = 'error';
         state.data = null;
         state.message = action.payload;
       });

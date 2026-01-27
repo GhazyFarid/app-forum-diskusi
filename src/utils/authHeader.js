@@ -1,5 +1,5 @@
-export function authHeader() {
-  const token = localStorage.getItem("access_token");
+export default function authHeader() {
+  const token = localStorage.getItem('access_token');
 
   if (!token) {
     return {};

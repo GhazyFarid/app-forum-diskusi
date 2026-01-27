@@ -1,25 +1,17 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { getThreadById } from "../reducer/threadReducer";
-import { daysAgo } from "../utils/date";
-import VoteButton from "../components/VoteButton";
-import { safeHtml } from "../utils/textUtils";
-import {
-  downVoteThread,
-  neutralVoteThread,
-  upVoteThread,
-} from "../reducer/voteThreadReducer";
-import CommentItem from "../components/CommentItem";
-import {
-  downVoteComment,
-  neutralVoteComment,
-  upVoteComment,
-} from "../reducer/voteCommentReducer";
-import { createComment } from "../reducer/commetReducer";
-import TextAreaInput from "../components/TextAreaInput";
-import Button from "../components/Button";
+import { getThreadById } from '../reducer/threadReducer';
+import daysAgo from '../utils/date';
+import VoteButton from '../components/VoteButton';
+import { safeHtml } from '../utils/textUtils';
+import { downVoteThread, neutralVoteThread, upVoteThread } from '../reducer/voteThreadReducer';
+import CommentItem from '../components/CommentItem';
+import { downVoteComment, neutralVoteComment, upVoteComment } from '../reducer/voteCommentReducer';
+import { createComment } from '../reducer/commetReducer';
+import TextAreaInput from '../components/TextAreaInput';
+import Button from '../components/Button';
 
 export default function ThreadDetailPage() {
   const { id } = useParams();
@@ -29,8 +21,8 @@ export default function ThreadDetailPage() {
   const { data: dataProfile } = useSelector((i) => i.auth.profile);
   const { data: detail, status } = useSelector((i) => i.threads.getThreadById);
   const [localDetail, setLocalDetail] = useState(null);
-  const userId = dataProfile?.id ?? "";
-  const [commentText, setCommentText] = useState("");
+  const userId = dataProfile?.id ?? '';
+  const [commentText, setCommentText] = useState('');
 
   useEffect(() => {
     if (detail) {
@@ -42,8 +34,8 @@ export default function ThreadDetailPage() {
     dispatch(getThreadById(id));
   }, [dispatch, id]);
 
-  if (status === "loading") {
-    return <p style={{ textAlign: "center", marginTop: 40 }}>Loading...</p>;
+  if (status === 'loading') {
+    return <p style={{ textAlign: 'center', marginTop: 40 }}>Loading...</p>;
   }
 
   if (!detail) return null;
@@ -54,7 +46,7 @@ export default function ThreadDetailPage() {
 
   const handleUpVote = () => {
     if (!userId) {
-      alert("Please login first!");
+      alert('Please login first!');
       return;
     }
 
@@ -62,7 +54,7 @@ export default function ThreadDetailPage() {
     if (hasUpVoted) {
       setLocalDetail((prev) => ({
         ...prev,
-        upVotesBy: prev.upVotesBy.filter((id) => id !== userId),
+        upVotesBy: prev.upVotesBy.filter((voterId) => voterId !== userId),
       }));
 
       dispatch(neutralVoteThread(localDetail.id));
@@ -72,7 +64,7 @@ export default function ThreadDetailPage() {
     setLocalDetail((prev) => ({
       ...prev,
       upVotesBy: [...prev.upVotesBy, userId],
-      downVotesBy: prev.downVotesBy.filter((id) => id !== userId),
+      downVotesBy: prev.downVotesBy.filter((voterId) => voterId !== userId),
     }));
 
     dispatch(upVoteThread(localDetail.id));
@@ -80,7 +72,7 @@ export default function ThreadDetailPage() {
 
   const handleDownVote = () => {
     if (!userId) {
-      alert("Please login first!");
+      alert('Please login first!');
       return;
     }
 
@@ -88,7 +80,7 @@ export default function ThreadDetailPage() {
     if (hasDownVoted) {
       setLocalDetail((prev) => ({
         ...prev,
-        downVotesBy: prev.downVotesBy.filter((id) => id !== userId),
+        downVotesBy: prev.downVotesBy.filter((voterId) => voterId !== userId),
       }));
 
       dispatch(neutralVoteThread(localDetail.id));
@@ -99,7 +91,7 @@ export default function ThreadDetailPage() {
     setLocalDetail((prev) => ({
       ...prev,
       downVotesBy: [...prev.downVotesBy, userId],
-      upVotesBy: prev.upVotesBy.filter((id) => id !== userId),
+      upVotesBy: prev.upVotesBy.filter((voterId) => voterId !== userId),
     }));
     dispatch(downVoteThread(localDetail.id));
   };
@@ -108,7 +100,7 @@ export default function ThreadDetailPage() {
     e.preventDefault();
 
     if (!userId) {
-      alert("Please login first!");
+      alert('Please login first!');
       return;
     }
 
@@ -126,9 +118,9 @@ export default function ThreadDetailPage() {
         comments: [response, ...prev.comments],
       }));
 
-      setCommentText("");
+      setCommentText('');
     } catch (error) {
-      console.error("Create comment failed:", error);
+      // console.error('Create comment failed:', error);
     }
   };
 
@@ -136,15 +128,15 @@ export default function ThreadDetailPage() {
     <div
       style={{
         maxWidth: 900,
-        margin: "0 auto",
-        padding: "24px 16px",
+        margin: '0 auto',
+        padding: '24px 16px',
       }}
     >
       {/* THREAD CARD */}
       <div
         style={{
-          backgroundColor: "#ffffff",
-          border: "1px solid #e5e7eb",
+          backgroundColor: '#ffffff',
+          border: '1px solid #e5e7eb',
           borderRadius: 12,
           padding: 24,
           marginBottom: 32,
@@ -153,27 +145,26 @@ export default function ThreadDetailPage() {
         {/* Category */}
         <div
           style={{
-            display: "inline-block",
-            padding: "4px 12px",
+            display: 'inline-block',
+            padding: '4px 12px',
             fontSize: 12,
-            backgroundColor: "#eff6ff",
-            color: "#2563eb",
+            backgroundColor: '#eff6ff',
+            color: '#2563eb',
             borderRadius: 999,
             marginBottom: 12,
           }}
         >
-          #{localDetail.category}
+          #
+          {localDetail.category}
         </div>
-        <h1 style={{ margin: "8px 0 16px", color: "#111827" }}>
-          {localDetail.title}
-        </h1>
+        <h1 style={{ margin: '8px 0 16px', color: '#111827' }}>{localDetail.title}</h1>
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
+            display: 'flex',
+            alignItems: 'center',
             gap: 12,
             marginBottom: 16,
-            color: "#6b7280",
+            color: '#6b7280',
             fontSize: 14,
           }}
         >
@@ -183,13 +174,11 @@ export default function ThreadDetailPage() {
             style={{
               width: 40,
               height: 40,
-              borderRadius: "50%",
+              borderRadius: '50%',
             }}
           />
           <div>
-            <div style={{ fontWeight: 500, color: "#111827" }}>
-              {localDetail.owner.name}
-            </div>
+            <div style={{ fontWeight: 500, color: '#111827' }}>{localDetail.owner.name}</div>
             <div>{daysAgo(localDetail.createdAt)}</div>
           </div>
         </div>
@@ -197,19 +186,20 @@ export default function ThreadDetailPage() {
           style={{
             lineHeight: 1.5,
             fontSize: 16,
-            color: "#374151",
-            whiteSpace: "pre-line",
+            color: '#374151',
+            whiteSpace: 'pre-line',
           }}
+          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={safeHtml(localDetail.body)}
         />
         {/* Thread Actions */}
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
+            display: 'flex',
+            alignItems: 'center',
             gap: 12,
             marginTop: 24,
-            borderTop: "1px solid #e5e7eb",
+            borderTop: '1px solid #e5e7eb',
             paddingTop: 16,
           }}
         >
@@ -232,7 +222,7 @@ export default function ThreadDetailPage() {
             <div
               style={{
                 marginTop: 24,
-                borderTop: "1px solid #e5e7eb",
+                borderTop: '1px solid #e5e7eb',
                 paddingTop: 16,
               }}
             >
@@ -255,62 +245,59 @@ export default function ThreadDetailPage() {
           <p
             style={{
               fontSize: 14,
-              color: "#6b7280",
+              color: '#6b7280',
             }}
           >
-            <span
-              onClick={() => navigate("/login")}
+            <button
+              type="button"
+              onClick={() => navigate('/login')}
               style={{
-                color: "#2563eb",
-                cursor: "pointer",
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                margin: 0,
+                color: '#2563eb',
+                cursor: 'pointer',
                 fontWeight: 500,
+                fontSize: 'inherit',
               }}
             >
               Login
-            </span>{" "}
+            </button>
             untuk memberi komentar
           </p>
         )}
       </div>
 
       {/* COMMENTS */}
-      <h3 style={{ marginBottom: 16 }}>Komentar ({detail.comments.length})</h3>
+      <h3 style={{ marginBottom: 16 }}>
+        Komentar (
+        {detail.comments.length}
+        )
+      </h3>
 
-      {detail.comments.length === 0 && (
-        <p style={{ color: "#6b7280" }}>Belum ada komentar</p>
-      )}
+      {detail.comments.length === 0 && <p style={{ color: '#6b7280' }}>Belum ada komentar</p>}
 
       {localDetail.comments.map((comment) => (
         <CommentItem
           key={comment.id}
           comment={comment}
           userId={userId}
-          onUpVote={() =>
-            dispatch(
-              upVoteComment({
-                threadId: localDetail.id,
-                commentId: comment.id,
-              }),
-            )
-          }
-          onDownVote={() =>
-            dispatch(
-              downVoteComment({
-                threadId: localDetail.id,
-                commentId: comment.id,
-              }),
-            )
-          }
-          onNeutralVote={() =>
-            dispatch(
-              neutralVoteComment({
-                threadId: localDetail.id,
-                commentId: comment.id,
-              }),
-            )
-          }
+          onUpVote={() => dispatch(upVoteComment({
+            threadId: localDetail.id,
+            commentId: comment.id,
+          }))}
+          onDownVote={() => dispatch(downVoteComment({
+            threadId: localDetail.id,
+            commentId: comment.id,
+          }))}
+          onNeutralVote={() => dispatch(neutralVoteComment({
+            threadId: localDetail.id,
+            commentId: comment.id,
+          }))}
         />
       ))}
+
     </div>
   );
 }

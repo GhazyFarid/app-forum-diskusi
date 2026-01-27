@@ -1,10 +1,10 @@
-export function daysAgo(dateString) {
+export default function daysAgo(dateString) {
   const created = new Date(dateString);
   const now = new Date();
 
   const diffMs = now - created;
 
-  if (diffMs < 0) return "hari ini";
+  if (diffMs < 0) return 'hari ini';
 
   const seconds = Math.floor(diffMs / 1000);
   if (seconds < 60) {

@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { BiArrowBack } from "react-icons/bi";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { BiArrowBack } from 'react-icons/bi';
 
-import { clearDataRegister, registerReducer } from "../reducer/registerReducer";
-import TextInput from "../components/TextInput";
-import PasswordInput from "../components/PasswordInput";
-import Button from "../components/Button";
+import { clearDataRegister, registerReducer } from '../reducer/registerReducer';
+import TextInput from '../components/TextInput';
+import PasswordInput from '../components/PasswordInput';
+import Button from '../components/Button';
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -14,9 +14,9 @@ export default function RegisterPage() {
   const { status } = useSelector((state) => state.register);
 
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: '',
+    email: '',
+    password: '',
   });
 
   const onSubmit = (e) => {
@@ -25,9 +25,9 @@ export default function RegisterPage() {
   };
 
   useEffect(() => {
-    if (status === "success") {
+    if (status === 'success') {
       dispatch(clearDataRegister());
-      navigate("/login");
+      navigate('/login');
     }
   }, [status, navigate, dispatch]);
 
@@ -38,15 +38,15 @@ export default function RegisterPage() {
           type="button"
           onClick={() => navigate(-1)}
           style={{
-            display: "inline-flex",
-            alignItems: "center",
+            display: 'inline-flex',
+            alignItems: 'center',
             gap: 6,
             fontSize: 14,
             fontWeight: 500,
-            color: "#2563eb",
-            background: "none",
-            border: "none",
-            cursor: "pointer",
+            color: '#2563eb',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
           }}
         >
           <BiArrowBack size={18} />
@@ -82,7 +82,7 @@ export default function RegisterPage() {
             required
           />
 
-          <Button disabled={status === "loading"} type="submit">
+          <Button disabled={status === 'loading'} type="submit">
             Register
           </Button>
         </form>

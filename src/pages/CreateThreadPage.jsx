@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { createThread } from "../reducer/threadReducer";
-import TextInput from "../components/TextInput";
-import TextAreaInput from "../components/TextAreaInput";
-import Button from "../components/Button";
+import { createThread } from '../reducer/threadReducer';
+import TextInput from '../components/TextInput';
+import TextAreaInput from '../components/TextAreaInput';
+import Button from '../components/Button';
 
 export default function CreateThreadPage() {
   const dispatch = useDispatch();
@@ -14,18 +14,17 @@ export default function CreateThreadPage() {
   const userId = useSelector((state) => state.auth.profile.data?.id);
 
   const [form, setForm] = useState({
-    title: "",
-    category: "",
-    body: "",
+    title: '',
+    category: '',
+    body: '',
   });
 
   const canSubmit = form.title.trim() && form.body.trim();
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log("userId", userId);
     if (!userId) {
-      alert("Please login first!");
+      alert('Please login first!');
       return;
     }
 
@@ -36,22 +35,22 @@ export default function CreateThreadPage() {
     };
 
     await dispatch(createThread(dataInput));
-    navigate("/");
+    navigate('/');
   };
 
   return (
     <div
       style={{
         maxWidth: 900,
-        margin: "0 auto",
-        padding: "24px 16px",
+        margin: '0 auto',
+        padding: '24px 16px',
       }}
     >
       <form onSubmit={onSubmit}>
         <div
           style={{
-            backgroundColor: "#ffffff",
-            border: "1px solid #e5e7eb",
+            backgroundColor: '#ffffff',
+            border: '1px solid #e5e7eb',
             borderRadius: 12,
             padding: 24,
             marginBottom: 32,

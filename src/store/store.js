@@ -1,16 +1,18 @@
-import { configureStore } from "@reduxjs/toolkit";
-import registerReducer from "../reducer/registerReducer";
-import authReducer from "../reducer/authReducer";
-import threadsReducer from "../reducer/threadReducer";
-import userReducer from '../reducer/userReducer';
-import leaderboardsReducer from '../reducer/leaderboardReducer';
+import { configureStore } from '@reduxjs/toolkit';
+import register from '../reducer/registerReducer';
+import auth from '../reducer/authReducer';
+import threads from '../reducer/threadReducer';
+import users from '../reducer/userReducer';
+import leaderboards from '../reducer/leaderboardReducer';
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
-    register: registerReducer,
-    auth: authReducer,
-    threads: threadsReducer,
-    users: userReducer,
-    leaderboards: leaderboardsReducer
+    register,
+    auth,
+    threads,
+    users,
+    leaderboards,
   },
 });
+
+export default store;
