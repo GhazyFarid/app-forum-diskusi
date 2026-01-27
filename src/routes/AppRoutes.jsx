@@ -31,10 +31,7 @@ export default function AppRoutes() {
           <Route path="/threads/:id" element={<ThreadDetailPage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
 
-          <Route
-            path="/threads/new"
-            element={isAuthenticated ? <CreateThreadPage /> : <div />}
-          />
+          <Route path="/threads/new" element={isAuthenticated ? <CreateThreadPage /> : <div />} />
         </Route>
 
         <Route path="/login" element={<LoginPage />} />

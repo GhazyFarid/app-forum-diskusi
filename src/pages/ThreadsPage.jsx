@@ -38,13 +38,16 @@ export default function ThreadsPage() {
     return Array.from(set);
   }, [threads]);
 
-  const usersById = useMemo(() => (dataUsers || []).reduce(
-    (acc, user) => ({
-      ...acc,
-      [user.id]: user,
-    }),
-    {},
-  ), [dataUsers]);
+  const usersById = useMemo(
+    () => (dataUsers || []).reduce(
+      (acc, user) => ({
+        ...acc,
+        [user.id]: user,
+      }),
+      {},
+    ),
+    [dataUsers],
+  );
 
   const filteredThreads = useMemo(() => {
     const source = selectedCategory
