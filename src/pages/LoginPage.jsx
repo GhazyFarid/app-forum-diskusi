@@ -49,7 +49,7 @@ export default function LoginPage() {
           }}
         >
           <BiArrowBack size={18} />
-          Kembalii
+          Kembali
         </button>
         <h2>Welcome Back</h2>
 
